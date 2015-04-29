@@ -1,22 +1,22 @@
+package projetlourd;
+
+import java.awt.event.WindowEvent;
+import static projetlourd.Connexion.PSEUDO;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetlourd;
-
-import java.awt.event.WindowEvent;
 
 /**
  *
- * @author francis
+ * @author drydge
  */
 public class Connexion extends javax.swing.JFrame {
 
-    public static String PSEUDO;
-    public static GestionBD GESTIONBD;
     /**
-     * Creates new form Fenetre
+     * Creates new form Connexion1
      */
     public Connexion() {
         initComponents();
@@ -30,82 +30,151 @@ public class Connexion extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        setTitle("Connexion");
-        
+
+        jPanel6 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(10, 0));
+        jLabel4 = new javax.swing.JLabel();
         connexionPseudonyme = new javax.swing.JTextField();
-        connexionPassword = new javax.swing.JTextField();
-        boutonConnexion = new javax.swing.JButton();
-        titreConnexion = new javax.swing.JLabel();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(10, 0));
+        jPanel2 = new javax.swing.JPanel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(10, 0));
+        jLabel5 = new javax.swing.JLabel();
+        connexionPassword = new javax.swing.JPasswordField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(10, 0));
+        jPanel4 = new javax.swing.JPanel();
+        ConnexionButton = new javax.swing.JButton();
+        inscriptionButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        setTitle("Connexion");
 
-        connexionPseudonyme.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        connexionPseudonyme.setToolTipText("Entrez votre pseudonyme");
+        jPanel6.setLayout(new java.awt.GridLayout(6, 3));
 
-        connexionPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        connexionPassword.setToolTipText("Entrez votre mot de passe");
+        jLabel6.setFont(new java.awt.Font("DejaVu Sans Ultra-Light", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Connexion");
 
-        boutonConnexion.setText("Connexion");
-        boutonConnexion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BoutonConnexionMouseClicked(evt);
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel6.add(jPanel5);
+
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel6.add(jPanel1);
+
+        jPanel3.setLayout(new java.awt.GridLayout(1, 2));
+        jPanel3.add(filler4);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Pseudo");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(jLabel4);
+
+        connexionPseudonyme.setText("Pseuso");
+        connexionPseudonyme.setName("connexionPseudonyme"); // NOI18N
+        connexionPseudonyme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connexionPseudonymeActionPerformed(evt);
             }
         });
-        titreConnexion.setText("Connexion");
+        jPanel3.add(connexionPseudonyme);
+        jPanel3.add(filler3);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(boutonConnexion)
-                                .addComponent(connexionPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(connexionPseudonyme, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(157, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(titreConnexion)
-                        .addGap(171, 171, 171))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(titreConnexion)
-                        .addGap(18, 18, 18)
-                        .addComponent(connexionPseudonyme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(connexionPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(boutonConnexion)
-                        .addContainerGap(73, Short.MAX_VALUE))
-        );
+        jPanel6.add(jPanel3);
+
+        jPanel2.setLayout(new java.awt.GridLayout(1, 1));
+        jPanel2.add(filler2);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Password");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(jLabel5);
+
+        connexionPassword.setText("jPasswordField2");
+        connexionPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connexionPasswordActionPerformed(evt);
+            }
+        });
+        jPanel2.add(connexionPassword);
+        jPanel2.add(filler1);
+
+        jPanel6.add(jPanel2);
+
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0, 5, 20));
+
+        ConnexionButton.setText("se connecter");
+        ConnexionButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ConnexionButtonMouseClicked(evt);
+            }
+        });
+        ConnexionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConnexionButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(ConnexionButton);
+
+        inscriptionButton.setText("s'inscrire");
+        jPanel4.add(inscriptionButton);
+
+        jPanel6.add(jPanel4);
+
+        getContentPane().add(jPanel6, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BoutonConnexionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonConnexionMouseClicked
+    private void connexionPseudonymeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connexionPseudonymeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_connexionPseudonymeActionPerformed
+
+    private void ConnexionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnexionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConnexionButtonActionPerformed
+
+    private void ConnexionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConnexionButtonMouseClicked
         String psd = connexionPseudonyme.getText();
         String pwd = connexionPassword.getText();
 
-        GESTIONBD = new GestionBD();
+        GestionBD gestionBD = new GestionBD();
 
-        boolean connexion = GESTIONBD.Connexion(psd, pwd);
+        boolean connexion = gestionBD.Connexion(psd, pwd);
 
         if (connexion) {
             PSEUDO = psd;
 
             Application app = new Application();
             app.setVisible(true);
+            app.gestionBD = gestionBD;
             setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         } else {
             System.out.println("Erreur");
         }
-    }//GEN-LAST:event_BoutonConnexionMouseClicked
+    }//GEN-LAST:event_ConnexionButtonMouseClicked
+
+    private void connexionPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connexionPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_connexionPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,9 +213,22 @@ public class Connexion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton boutonConnexion;
-    private javax.swing.JTextField connexionPassword;
+    private javax.swing.JButton ConnexionButton;
+    private javax.swing.JPasswordField connexionPassword;
     private javax.swing.JTextField connexionPseudonyme;
-    private javax.swing.JLabel titreConnexion;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.JButton inscriptionButton;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }
