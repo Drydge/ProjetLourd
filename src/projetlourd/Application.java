@@ -68,11 +68,21 @@ public class Application extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Application");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(500, 50000));
+        setMinimumSize(new java.awt.Dimension(500, 500));
         setName("application"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(500, 500));
+        setResizable(false);
+
+        header.setMaximumSize(new java.awt.Dimension(500, 90));
+        header.setMinimumSize(new java.awt.Dimension(500, 90));
+        header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         rechercheTextField.setToolTipText("Rechercher un document");
+        header.add(rechercheTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 128, 30));
 
         rechercheComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Titre", "Auteur" }));
+        header.add(rechercheComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, -1, 30));
 
         rechercheButton.setText("Recherche");
         rechercheButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,6 +90,7 @@ public class Application extends javax.swing.JFrame {
                 rechercheButtonMouseClicked(evt);
             }
         });
+        header.add(rechercheButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, 30));
 
         deconnexionButton.setText("Déconnexion");
         deconnexionButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,60 +98,17 @@ public class Application extends javax.swing.JFrame {
                 deconnexionButtonMouseClicked(evt);
             }
         });
+        header.add(deconnexionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
 
         jLabel2.setText("Bonjour " + Connexion.PSEUDO);
-
-        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
-        header.setLayout(headerLayout);
-        headerLayout.setHorizontalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deconnexionButton)
-                    .addGroup(headerLayout.createSequentialGroup()
-                        .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rechercheButton))
-                    .addComponent(jLabel2))
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
-        headerLayout.setVerticalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rechercheButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deconnexionButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        header.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 30));
 
         getContentPane().add(header, java.awt.BorderLayout.NORTH);
 
-        jLabel1.setText("Adresse des membres du groupe");
+        footer.setLayout(new java.awt.GridLayout());
 
-        javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
-        footer.setLayout(footerLayout);
-        footerLayout.setHorizontalGroup(
-            footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(footerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(220, Short.MAX_VALUE))
-        );
-        footerLayout.setVerticalGroup(
-            footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
-        );
+        jLabel1.setText("Adresse des membres du groupe");
+        footer.add(jLabel1);
 
         getContentPane().add(footer, java.awt.BorderLayout.SOUTH);
 
