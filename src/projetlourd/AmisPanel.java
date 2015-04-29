@@ -3,6 +3,8 @@ package projetlourd;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,42 +13,38 @@ import javax.swing.JPanel;
  *
  * @author francis
  */
-class AmisPanel extends JPanel {
+class AmisPanel extends JPanel implements Observer {
 
-    JLabel labelAmi;
+    ArrayList<JLabel> labelAmi = new ArrayList<>();
+    ObversableAmis observableAmis;
 
-    public AmisPanel(String pseudo) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        GestionBD gestionBD = Connexion.GESTIONBD;
+    public AmisPanel(ObversableAmis oa) {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        observableAmis = oa;
+        
+        observableAmis.addObserver(this);
+        
+        for (String lAmi : oa.lAmis) {
+            labelAmi.add(new JLabel(lAmi));
+            this.add(labelAmi.get(labelAmi.size() - 1));
 
-        String amis = gestionBD.getAmis(Connexion.PSEUDO);
-
-        String[] parties = amis.split(",");
-        String[] parties2;
-
-        List<String> lAmis = new ArrayList<>();
-
-        //on exécute des traitements sur la chaîne retournée et on ajoute les amis à une liste de String
-        for (String party : parties) {
-            parties2 = party.split("-");
-            lAmis.add(parties2[0]);
+            AmisControleur aC = new AmisControleur(observableAmis, this);
+            
+            labelAmi.get(labelAmi.size() - 1).addMouseListener(aC);
         }
-
-        for (String lAmi : lAmis) {
-            labelAmi = new JLabel(lAmi);
-            this.add(labelAmi);
-
-            labelAmi.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    LabelAmiMouseClicked(evt);
-                }
-            });
-        }
-
     }
-
-    private void LabelAmiMouseClicked(MouseEvent evt) {
-        JLabel jlab = (JLabel) evt.getComponent();
-        System.out.println("on clique sur " + jlab.getText());
+    
+    @Override
+    public void update(Observable o, Object o1) {
+        observableAmis.lAmis = ((ObversableAmis) o).getLAmis();
+        
+        int i = 0;
+        
+        for (JLabel labelAmi1 : labelAmi) {
+            labelAmi1.setText(observableAmis.lAmis.get(i));
+            i++;
+        }
+        
+        repaint();
     }
 }

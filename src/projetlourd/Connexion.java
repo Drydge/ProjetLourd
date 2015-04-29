@@ -94,11 +94,7 @@ public class Connexion extends javax.swing.JFrame {
 
         connexionPseudonyme.setText("Pseuso");
         connexionPseudonyme.setName("connexionPseudonyme"); // NOI18N
-        connexionPseudonyme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connexionPseudonymeActionPerformed(evt);
-            }
-        });
+        
         jPanel3.add(connexionPseudonyme);
         jPanel3.add(filler3);
 
@@ -113,11 +109,7 @@ public class Connexion extends javax.swing.JFrame {
         jPanel2.add(jLabel5);
 
         connexionPassword.setText("jPasswordField2");
-        connexionPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connexionPasswordActionPerformed(evt);
-            }
-        });
+        
         jPanel2.add(connexionPassword);
         jPanel2.add(filler1);
 
@@ -135,11 +127,7 @@ public class Connexion extends javax.swing.JFrame {
                 }
             }
         });
-        ConnexionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConnexionButtonActionPerformed(evt);
-            }
-        });
+        
         jPanel4.add(ConnexionButton);
 
         inscriptionButton.setText("s'inscrire");
@@ -151,15 +139,7 @@ public class Connexion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void connexionPseudonymeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connexionPseudonymeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_connexionPseudonymeActionPerformed
-
-    private void ConnexionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnexionButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConnexionButtonActionPerformed
-
+    
     private void ConnexionButtonMouseClicked(java.awt.event.MouseEvent evt) throws IOException {//GEN-FIRST:event_ConnexionButtonMouseClicked
         String psd = connexionPseudonyme.getText();
         String pwd = connexionPassword.getText();
@@ -178,10 +158,6 @@ public class Connexion extends javax.swing.JFrame {
             System.out.println("Erreur");
         }
     }//GEN-LAST:event_ConnexionButtonMouseClicked
-
-    private void connexionPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connexionPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_connexionPasswordActionPerformed
 
     /**
      * @param args the command line arguments

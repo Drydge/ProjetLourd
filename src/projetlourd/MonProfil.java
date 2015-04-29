@@ -5,6 +5,9 @@
  */
 package projetlourd;
 
+import java.util.Observable;
+import javax.swing.JLabel;
+
 
 /**
  *
@@ -22,8 +25,11 @@ public class MonProfil extends javax.swing.JPanel {
     public MonProfil() {
         initComponents();
         
-        amisPanel = new AmisPanel(Connexion.PSEUDO);
+        ObversableAmis oa = new ObversableAmis(Connexion.PSEUDO);
+        
+        amisPanel = new AmisPanel(oa);
         amisScrollPane.setViewportView(amisPanel);
+        
         
         travailleSurPanel = new TravailleSurPanel(Connexion.PSEUDO);
         travailleSurScrollPane.setViewportView(travailleSurPanel);
