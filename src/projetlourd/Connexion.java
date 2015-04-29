@@ -1,6 +1,8 @@
 package projetlourd;
 
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+
 import static projetlourd.Connexion.PSEUDO;
 
 /*
@@ -126,7 +128,11 @@ public class Connexion extends javax.swing.JFrame {
         ConnexionButton.setText("se connecter");
         ConnexionButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ConnexionButtonMouseClicked(evt);
+                try {
+                    ConnexionButtonMouseClicked(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         ConnexionButton.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +160,7 @@ public class Connexion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConnexionButtonActionPerformed
 
-    private void ConnexionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConnexionButtonMouseClicked
+    private void ConnexionButtonMouseClicked(java.awt.event.MouseEvent evt) throws IOException {//GEN-FIRST:event_ConnexionButtonMouseClicked
         String psd = connexionPseudonyme.getText();
         String pwd = connexionPassword.getText();
 
@@ -165,8 +171,8 @@ public class Connexion extends javax.swing.JFrame {
         if (connexion) {
             PSEUDO = psd;
 
-            Application app = new Application();
-            app.setVisible(true);
+            Application.getInstance();
+            Application.getInstance().setVisible(true);
             setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         } else {

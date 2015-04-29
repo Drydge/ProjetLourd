@@ -6,6 +6,7 @@
 package projetlourd;
 
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ import javax.swing.JPanel;
 public class Application extends javax.swing.JFrame {
 
     JPanel centerPanel;
-
+    private static Application _instance;
     /**
      * Creates new form Application
      */
@@ -33,6 +34,16 @@ public class Application extends javax.swing.JFrame {
         centerPanel = new MonProfil();
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
         pack();
+    }
+    public final static  Application getInstance() throws IOException {
+        if(_instance == null){
+            synchronized(Application.class){
+                if(Application._instance == null) {
+                    Application._instance = new Application();
+                }
+            }
+        }
+        return _instance;
     }
 
     /**
