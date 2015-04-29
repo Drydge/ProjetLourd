@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 public class Connexion extends javax.swing.JFrame {
 
     public static String PSEUDO;
+    public static GestionBD GESTIONBD;
     /**
      * Creates new form Fenetre
      */
@@ -90,16 +91,15 @@ public class Connexion extends javax.swing.JFrame {
         String psd = connexionPseudonyme.getText();
         String pwd = connexionPassword.getText();
 
-        GestionBD gestionBD = new GestionBD();
+        GESTIONBD = new GestionBD();
 
-        boolean connexion = gestionBD.Connexion(psd, pwd);
+        boolean connexion = GESTIONBD.Connexion(psd, pwd);
 
         if (connexion) {
             PSEUDO = psd;
 
             Application app = new Application();
             app.setVisible(true);
-            app.gestionBD = gestionBD;
             setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         } else {

@@ -5,6 +5,15 @@
  */
 package projetlourd;
 
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.SftpException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author francis
@@ -14,8 +23,12 @@ public class MonProfil extends javax.swing.JPanel {
     /**
      * Creates new form MonProfil
      */
+    AmisPanel amisPanel;
+    
     public MonProfil() {
         initComponents();
+        amisPanel = new AmisPanel(Connexion.PSEUDO);
+        amisScrollPane.setViewportView(amisPanel);
     }
 
     /**
@@ -39,12 +52,17 @@ public class MonProfil extends javax.swing.JPanel {
         lectureComboBox = new javax.swing.JComboBox();
         ecritureComboBox = new javax.swing.JComboBox();
         creerDocumentButton = new javax.swing.JButton();
+        amisScrollPane = new javax.swing.JScrollPane();
+        travailleSurScrollPane = new javax.swing.JScrollPane();
+        travailleSurPanel = new javax.swing.JPanel();
+        demandeScrollPane = new javax.swing.JScrollPane();
+        demandePanel = new javax.swing.JPanel();
 
         accueilProfilLabel.setText("Bienvenue sur votre profil");
 
-        amisLabel.setText("<html> <body> <h3>Mes amis</h3> </body> </html>");
+        amisLabel.setText("Mes amis");
 
-        travailleSurLabel.setText("<html> <body> <h3>Travaille sur</h3> </body> </html>");
+        travailleSurLabel.setText("Travaille sur");
 
         demandeAmisLabel.setText("Demande d'amis");
 
@@ -53,57 +71,105 @@ public class MonProfil extends javax.swing.JPanel {
         demandeAmisTextField.setToolTipText("Entrez ici le pseudonyme de votre potentiel futur ami");
 
         demandeAmisButton.setText("Envoyer");
+        demandeAmisButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                demandeAmisButtonMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Créer un document :");
 
         creerDocumentTextField.setToolTipText("Entrez ici le titre du document que vous voulez créer");
 
         lectureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Public", "Amis", "Utilisateur" }));
-        lectureComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lectureComboBoxActionPerformed(evt);
-            }
-        });
 
         ecritureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Public", "Amis", "Utilisateur" }));
 
         creerDocumentButton.setText("Créer !");
+        creerDocumentButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                creerDocumentButtonMouseClicked(evt);
+            }
+        });
+
+        amisScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        javax.swing.GroupLayout travailleSurPanelLayout = new javax.swing.GroupLayout(travailleSurPanel);
+        travailleSurPanel.setLayout(travailleSurPanelLayout);
+        travailleSurPanelLayout.setHorizontalGroup(
+            travailleSurPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        travailleSurPanelLayout.setVerticalGroup(
+            travailleSurPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 184, Short.MAX_VALUE)
+        );
+
+        travailleSurScrollPane.setViewportView(travailleSurPanel);
+
+        javax.swing.GroupLayout demandePanelLayout = new javax.swing.GroupLayout(demandePanel);
+        demandePanel.setLayout(demandePanelLayout);
+        demandePanelLayout.setHorizontalGroup(
+            demandePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 177, Short.MAX_VALUE)
+        );
+        demandePanelLayout.setVerticalGroup(
+            demandePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 184, Short.MAX_VALUE)
+        );
+
+        demandeScrollPane.setViewportView(demandePanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(accueilProfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(demandeAmisButton)
-                .addGap(66, 66, 66))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(amisLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(demandeAmisLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(travailleSurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(demandeAmisTextField)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(amisLabel)
+                                .addGap(96, 96, 96)
+                                .addComponent(travailleSurLabel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(creerDocumentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lectureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(ecritureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(creerDocumentButton)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(demandeAmisLabel)
+                                .addGap(146, 146, 146))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(amisScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(travailleSurScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(demandeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(accueilProfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(creerDocumentTextField)
+                        .addContainerGap()
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lectureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ecritureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(creerDocumentButton)))
-                .addContainerGap())
+                        .addComponent(demandeAmisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(demandeAmisButton)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,49 +177,91 @@ public class MonProfil extends javax.swing.JPanel {
                 .addComponent(accueilProfilLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(amisLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(travailleSurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(demandeAmisLabel)
-                    .addComponent(jLabel1))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(amisLabel)
+                    .addComponent(travailleSurLabel)
+                    .addComponent(demandeAmisLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(travailleSurScrollPane)
+                    .addComponent(demandeScrollPane)
+                    .addComponent(amisScrollPane))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(demandeAmisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(demandeAmisButton)
-                        .addGap(67, 90, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(creerDocumentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lectureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ecritureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(creerDocumentButton))
-                        .addContainerGap())))
+                        .addComponent(demandeAmisButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creerDocumentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lectureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ecritureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creerDocumentButton)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lectureComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lectureComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lectureComboBoxActionPerformed
+    private void demandeAmisButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_demandeAmisButtonMouseClicked
+        Application app = (Application) SwingUtilities.getWindowAncestor(this);
+        GestionBD gestionBD = Connexion.GESTIONBD;
+
+        String pseudo = Connexion.PSEUDO;
+        String pseudoAmi = demandeAmisTextField.getText();
+
+        if (!gestionBD.sontAmis(pseudo, pseudoAmi)) {
+            //Si les 2 pseudonymes ne sont pas déjà amis on ajoute le couple (pseudo, pseudoAmi) à la table DemandeAmis
+            gestionBD.setDemandeAmis(pseudo, pseudoAmi);
+        }
+    }//GEN-LAST:event_demandeAmisButtonMouseClicked
+
+    private void creerDocumentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creerDocumentButtonMouseClicked
+        Application app = (Application) SwingUtilities.getWindowAncestor(this);
+        GestionBD gestionBD = Connexion.GESTIONBD;
+
+        String auteur = Connexion.PSEUDO;
+        String titre = creerDocumentTextField.getText();
+        String lecture = (String) lectureComboBox.getSelectedItem();
+        String ecriture = (String) ecritureComboBox.getSelectedItem();
+
+        if (gestionBD.setNouveauDocument(titre, lecture, ecriture, auteur)) {
+            //Si l'ajout du Document à la base s'est bien passé on creer le document sur mira
+            String id = gestionBD.getIDDocument(titre, auteur);
+
+            try {
+                //on créé cet objet qui permettra de creer des fichiers ou des dossiers mais aussi de les lire
+                ChannelSftp sftp = (ChannelSftp) GestionBD.session.openChannel("sftp");
+                sftp.connect(); //on se connecte
+
+                //le chemin de base sera ~/session 
+                OutputStream out = sftp.put("Projet/" + auteur + "/" + id);
+                //avec cet implémentation de put on créé le fichier id à l'emplacement ~/session/Projet/nom_auteur/
+                out.close(); //on ferme l'OutputStream obtenu car on n'en a pas besoin
+
+                sftp.disconnect(); // on se déconnecte
+            } catch (JSchException | SftpException | IOException ex) {
+                Logger.getLogger(MonProfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_creerDocumentButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel accueilProfilLabel;
     private javax.swing.JLabel amisLabel;
+    private javax.swing.JScrollPane amisScrollPane;
     private javax.swing.JButton creerDocumentButton;
     private javax.swing.JTextField creerDocumentTextField;
     private javax.swing.JButton demandeAmisButton;
     private javax.swing.JLabel demandeAmisLabel;
     private javax.swing.JTextField demandeAmisTextField;
+    private javax.swing.JPanel demandePanel;
+    private javax.swing.JScrollPane demandeScrollPane;
     private javax.swing.JComboBox ecritureComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox lectureComboBox;
     private javax.swing.JLabel travailleSurLabel;
+    private javax.swing.JPanel travailleSurPanel;
+    private javax.swing.JScrollPane travailleSurScrollPane;
     // End of variables declaration//GEN-END:variables
 }
