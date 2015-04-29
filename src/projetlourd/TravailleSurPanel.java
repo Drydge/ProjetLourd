@@ -36,7 +36,8 @@ class TravailleSurPanel extends JPanel {
         }
 
         for (String[] lDoc1 : lDoc) {
-            labelTravailleSur = new JLabel(lDoc1[0] + " " + lDoc1[1]);
+            labelTravailleSur = new JLabel(lDoc1[1]);
+            labelTravailleSur.setName(lDoc1[0]);
             this.add(labelTravailleSur);
 
             labelTravailleSur.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -49,6 +50,6 @@ class TravailleSurPanel extends JPanel {
 
     private void LabelTravailleSurMouseClicked(MouseEvent evt) {
         JLabel jlab = (JLabel) evt.getComponent();
-        System.out.println("on clique sur " + jlab.getText());
+        System.out.println("on clique sur " + jlab.getText() + " et son ID est " + jlab.getName());
     }
 }
