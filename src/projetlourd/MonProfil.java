@@ -47,9 +47,11 @@ public class MonProfil extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jPanel5 = new javax.swing.JPanel();
         AmisSelected = new javax.swing.JTabbedPane();
         amisScrollPane = new javax.swing.JScrollPane();
-        travailleSurScrollPane = new javax.swing.JScrollPane();
         demandeamisScrollPane = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -63,18 +65,32 @@ public class MonProfil extends javax.swing.JPanel {
         ecritureComboBox = new javax.swing.JComboBox();
         lectureComboBox = new javax.swing.JComboBox();
         creerDocumentButton = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        travailleSurScrollPane = new javax.swing.JScrollPane();
 
-        setLayout(new java.awt.BorderLayout());
+        setMinimumSize(new java.awt.Dimension(500, 200));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(500, 200));
+        setLayout(new java.awt.BorderLayout(15, 20));
+        add(filler3, java.awt.BorderLayout.LINE_END);
+        add(filler4, java.awt.BorderLayout.WEST);
 
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        AmisSelected.setMinimumSize(new java.awt.Dimension(143, 100));
+        AmisSelected.setName(""); // NOI18N
+        AmisSelected.setPreferredSize(new java.awt.Dimension(143, 100));
+
+        amisScrollPane.setMaximumSize(new java.awt.Dimension(25, 25));
+        amisScrollPane.setName(""); // NOI18N
         AmisSelected.addTab("Mes amis", amisScrollPane);
-        AmisSelected.addTab("travail sur", travailleSurScrollPane);
         AmisSelected.addTab("demande d'amis", demandeamisScrollPane);
 
-        add(AmisSelected, java.awt.BorderLayout.CENTER);
+        jPanel5.add(AmisSelected, java.awt.BorderLayout.WEST);
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 0));
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         demandeAmisTextField.setToolTipText("Entrez ici le pseudonyme de votre potentiel futur ami");
         demandeAmisTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +100,7 @@ public class MonProfil extends javax.swing.JPanel {
         });
         jPanel2.add(demandeAmisTextField);
 
-        jPanel6.setLayout(new java.awt.GridLayout());
+        jPanel6.setLayout(new java.awt.GridLayout(1, 0));
         jPanel6.add(filler1);
 
         demandeAmisButton.setText("Envoyer");
@@ -94,12 +110,12 @@ public class MonProfil extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2);
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         creerDocumentTextField.setToolTipText("Entrez ici le titre du document que vous voulez créer");
         jPanel3.add(creerDocumentTextField);
 
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         ecritureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Public", "Amis", "Utilisateur" }));
         jPanel4.add(ecritureComboBox);
@@ -119,7 +135,15 @@ public class MonProfil extends javax.swing.JPanel {
 
         jPanel1.add(jPanel3);
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        jPanel5.add(jPanel1, java.awt.BorderLayout.PAGE_END);
+
+        jTabbedPane1.setToolTipText("");
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTabbedPane1.addTab("travail sur", travailleSurScrollPane);
+
+        jPanel5.add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
+        add(jPanel5, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lectureComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lectureComboBoxActionPerformed
@@ -141,11 +165,15 @@ public class MonProfil extends javax.swing.JPanel {
     private javax.swing.JScrollPane demandeamisScrollPane;
     private javax.swing.JComboBox ecritureComboBox;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox lectureComboBox;
     private javax.swing.JScrollPane travailleSurScrollPane;
     // End of variables declaration//GEN-END:variables

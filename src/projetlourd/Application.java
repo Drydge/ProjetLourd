@@ -61,14 +61,19 @@ public class Application extends javax.swing.JFrame {
         rechercheComboBox = new javax.swing.JComboBox();
         rechercheButton = new javax.swing.JButton();
         deconnexionButton = new javax.swing.JButton();
-        monProfilButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         footer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Application");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(500, 500));
         setName("application"); // NOI18N
+        setResizable(false);
+
+        header.setMaximumSize(new java.awt.Dimension(500, 90));
+        header.setMinimumSize(new java.awt.Dimension(500, 90));
 
         rechercheTextField.setToolTipText("Rechercher un document");
 
@@ -88,59 +93,47 @@ public class Application extends javax.swing.JFrame {
             }
         });
 
-        monProfilButton.setText("Bonjour " + Connexion.PSEUDO);
+        jLabel2.setText("Bonjour " + Connexion.PSEUDO);
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(deconnexionButton))
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deconnexionButton)
                     .addGroup(headerLayout.createSequentialGroup()
-                        .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(80, 80, 80)
                         .addComponent(rechercheButton))
-                    .addComponent(monProfilButton))
-                .addContainerGap(135, Short.MAX_VALUE))
+                    .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addComponent(monProfilButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rechercheButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deconnexionButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deconnexionButton))
+                .addGap(18, 18, 18)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechercheButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getContentPane().add(header, java.awt.BorderLayout.NORTH);
 
-        jLabel1.setText("Adresse des membres du groupe");
+        footer.setLayout(new java.awt.GridLayout(1, 0));
 
-        javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
-        footer.setLayout(footerLayout);
-        footerLayout.setHorizontalGroup(
-            footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(footerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(220, Short.MAX_VALUE))
-        );
-        footerLayout.setVerticalGroup(
-            footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
-        );
+        jLabel1.setText("Adresse des membres du groupe");
+        footer.add(jLabel1);
 
         getContentPane().add(footer, java.awt.BorderLayout.SOUTH);
 
@@ -183,7 +176,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton monProfilButton;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton rechercheButton;
     private javax.swing.JComboBox rechercheComboBox;
     private javax.swing.JTextField rechercheTextField;
