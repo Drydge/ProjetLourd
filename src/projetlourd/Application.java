@@ -8,6 +8,7 @@ package projetlourd;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
 
 /*TO DO :
 */
@@ -22,15 +23,16 @@ import java.util.List;
  */
 public class Application extends javax.swing.JFrame {
 
-    MonProfil monProfil;
-    public GestionBD gestionBD;
+    JPanel centerPanel;
 
     /**
      * Creates new form Application
      */
     public Application() {
         initComponents();
-        
+        centerPanel = new MonProfil();
+        getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
+        pack();
     }
 
     /**
@@ -50,7 +52,6 @@ public class Application extends javax.swing.JFrame {
         monProfilButton = new javax.swing.JButton();
         footer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Application");
@@ -131,19 +132,6 @@ public class Application extends javax.swing.JFrame {
 
         getContentPane().add(footer, java.awt.BorderLayout.SOUTH);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -151,7 +139,7 @@ public class Application extends javax.swing.JFrame {
         String toSearch = rechercheTextField.getText();
         String type = (String) rechercheComboBox.getSelectedItem();
 
-        String recherches = gestionBD.getRecherche(type, toSearch);
+        String recherches = Connexion.GESTIONBD.getRecherche(type, toSearch);
 
         System.out.println(recherches);
 
@@ -169,7 +157,7 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_rechercheButtonMouseClicked
 
     private void deconnexionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deconnexionButtonMouseClicked
-        gestionBD.Close();
+        Connexion.GESTIONBD.Close();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -183,7 +171,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton monProfilButton;
     private javax.swing.JButton rechercheButton;
     private javax.swing.JComboBox rechercheComboBox;
