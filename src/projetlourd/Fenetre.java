@@ -54,12 +54,6 @@ public class Fenetre extends javax.swing.JFrame {
                 BoutonConnexionMouseClicked(evt);
             }
         });
-        BoutonConnexion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BoutonConnexionKeyPressed(evt);
-            }
-        });
-
         TitreConnexion.setText("Connexion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,17 +107,14 @@ public class Fenetre extends javax.swing.JFrame {
             //afficher fenetre monProfil
             Application app = new Application();
             gestionBD.Close();
-            app.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         } else {
             System.out.println("Erreur");
         }
     }//GEN-LAST:event_BoutonConnexionMouseClicked
 
-    private void BoutonConnexionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BoutonConnexionKeyPressed
-        
-        //BoutonConnexionMouseClicked((java.awt.event)evt);
-    }//GEN-LAST:event_BoutonConnexionKeyPressed
+    private void BoutonConnexionKeyPressed(java.awt.event.KeyEvent evt) {
+    }
 
     /**
      * @param args the command line arguments
