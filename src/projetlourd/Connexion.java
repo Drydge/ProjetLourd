@@ -16,7 +16,6 @@ import static projetlourd.Connexion.PSEUDO;
 public class Connexion extends javax.swing.JFrame {
 
     public static String PSEUDO;
-    public static GestionBD GESTIONBD;
     /**
      * Creates new form Connexion1
      */
@@ -158,15 +157,16 @@ public class Connexion extends javax.swing.JFrame {
         String psd = connexionPseudonyme.getText();
         String pwd = connexionPassword.getText();
 
-        GESTIONBD = new GestionBD();
+        GestionBD gestionBD = new GestionBD();
 
-        boolean connexion = GESTIONBD.Connexion(psd, pwd);
+        boolean connexion = gestionBD.Connexion(psd, pwd);
 
         if (connexion) {
             PSEUDO = psd;
 
             Application app = new Application();
             app.setVisible(true);
+            app.gestionBD = gestionBD;
             setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         } else {
