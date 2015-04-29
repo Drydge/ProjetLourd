@@ -92,7 +92,7 @@ public class Connexion extends javax.swing.JFrame {
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(jLabel4);
 
-        connexionPseudonyme.setText("Pseuso");
+        connexionPseudonyme.setText("Thierry9000");
         connexionPseudonyme.setName("connexionPseudonyme"); // NOI18N
         connexionPseudonyme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class Connexion extends javax.swing.JFrame {
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel2.add(jLabel5);
 
-        connexionPassword.setText("jPasswordField2");
+        connexionPassword.setText("Thierry9000");
         connexionPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 connexionPasswordActionPerformed(evt);

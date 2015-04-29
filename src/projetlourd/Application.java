@@ -61,7 +61,7 @@ public class Application extends javax.swing.JFrame {
         rechercheComboBox = new javax.swing.JComboBox();
         rechercheButton = new javax.swing.JButton();
         deconnexionButton = new javax.swing.JButton();
-        monProfilButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         footer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -88,7 +88,7 @@ public class Application extends javax.swing.JFrame {
             }
         });
 
-        monProfilButton.setText("Bonjour " + Connexion.PSEUDO);
+        jLabel2.setText("Bonjour " + Connexion.PSEUDO);
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
@@ -104,13 +104,13 @@ public class Application extends javax.swing.JFrame {
                         .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rechercheButton))
-                    .addComponent(monProfilButton))
-                .addContainerGap(135, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addComponent(monProfilButton)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,7 +183,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton monProfilButton;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton rechercheButton;
     private javax.swing.JComboBox rechercheComboBox;
     private javax.swing.JTextField rechercheTextField;
