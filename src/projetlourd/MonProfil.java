@@ -5,7 +5,6 @@
  */
 package projetlourd;
 
-import javax.swing.JLabel;
 
 /**
  *
@@ -15,6 +14,7 @@ public class MonProfil extends javax.swing.JPanel {
 
     AmisPanel amisPanel;
     TravailleSurPanel travailleSurPanel;
+    DemandeAmiPanel demandeAmisPanel;
 
     /**
      * Creates new form MonProfil
@@ -27,6 +27,9 @@ public class MonProfil extends javax.swing.JPanel {
         
         travailleSurPanel = new TravailleSurPanel(Connexion.PSEUDO);
         travailleSurScrollPane.setViewportView(travailleSurPanel);
+        
+        //demandeAmisPanel = new DemandeAmiPanel(Connexion.PSEUDO);
+        //demandeamisScrollPane.setViewportView(demandeAmisPanel);
     }
 
     /**
