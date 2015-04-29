@@ -171,7 +171,6 @@ public class Connexion extends javax.swing.JFrame {
         if (connexion) {
             PSEUDO = psd;
 
-            Application.getInstance();
             Application.getInstance().setVisible(true);
             setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
