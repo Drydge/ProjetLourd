@@ -13,8 +13,6 @@ import java.awt.event.WindowEvent;
  */
 public class Fenetre extends javax.swing.JFrame {
 
-
-
     /**
      * Creates new form Fenetre
      */
