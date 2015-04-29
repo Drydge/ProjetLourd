@@ -128,6 +128,8 @@ public class MonProfil extends javax.swing.JPanel {
 
         jPanel5.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
+        jTabbedPane1.setToolTipText("");
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.addTab("travail sur", travailleSurScrollPane);
 
         jPanel5.add(jTabbedPane1, java.awt.BorderLayout.CENTER);
