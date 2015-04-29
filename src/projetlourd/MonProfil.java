@@ -14,14 +14,19 @@ import javax.swing.JLabel;
 public class MonProfil extends javax.swing.JPanel {
 
     AmisPanel amisPanel;
+    TravailleSurPanel travailleSurPanel;
 
     /**
      * Creates new form MonProfil
      */
     public MonProfil() {
         initComponents();
+        
         amisPanel = new AmisPanel(Connexion.PSEUDO);
         amisScrollPane.setViewportView(amisPanel);
+        
+        travailleSurPanel = new TravailleSurPanel(Connexion.PSEUDO);
+        travailleSurScrollPane.setViewportView(travailleSurPanel);
     }
 
     /**

@@ -35,6 +35,7 @@ public class Application extends javax.swing.JFrame {
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
         pack();
     }
+    
     public final static  Application getInstance() throws IOException {
         if(_instance == null){
             synchronized(Application.class){
