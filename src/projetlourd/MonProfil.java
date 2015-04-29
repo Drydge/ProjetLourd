@@ -43,7 +43,6 @@ public class MonProfil extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         AmisSelected = new javax.swing.JTabbedPane();
         amisScrollPane = new javax.swing.JScrollPane();
-        travailleSurScrollPane = new javax.swing.JScrollPane();
         demandeamisScrollPane = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -57,6 +56,8 @@ public class MonProfil extends javax.swing.JPanel {
         ecritureComboBox = new javax.swing.JComboBox();
         lectureComboBox = new javax.swing.JComboBox();
         creerDocumentButton = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        travailleSurScrollPane = new javax.swing.JScrollPane();
 
         setMinimumSize(new java.awt.Dimension(500, 200));
         setName(""); // NOI18N
@@ -67,15 +68,16 @@ public class MonProfil extends javax.swing.JPanel {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
+        AmisSelected.setMinimumSize(new java.awt.Dimension(143, 100));
         AmisSelected.setName(""); // NOI18N
+        AmisSelected.setPreferredSize(new java.awt.Dimension(143, 100));
 
         amisScrollPane.setMaximumSize(new java.awt.Dimension(25, 25));
         amisScrollPane.setName(""); // NOI18N
         AmisSelected.addTab("Mes amis", amisScrollPane);
-        AmisSelected.addTab("travail sur", travailleSurScrollPane);
         AmisSelected.addTab("demande d'amis", demandeamisScrollPane);
 
-        jPanel5.add(AmisSelected, java.awt.BorderLayout.CENTER);
+        jPanel5.add(AmisSelected, java.awt.BorderLayout.WEST);
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 0));
 
@@ -126,6 +128,10 @@ public class MonProfil extends javax.swing.JPanel {
 
         jPanel5.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
+        jTabbedPane1.addTab("travail sur", travailleSurScrollPane);
+
+        jPanel5.add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
         add(jPanel5, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,6 +162,7 @@ public class MonProfil extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox lectureComboBox;
     private javax.swing.JScrollPane travailleSurScrollPane;
     // End of variables declaration//GEN-END:variables
