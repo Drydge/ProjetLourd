@@ -34,15 +34,17 @@ class TravailleSurPanel extends JPanel {
         }
 
         for (String[] lDoc1 : lDoc) {
-            labelTravailleSur = new JLabel(lDoc1[1]);
-            labelTravailleSur.setName(lDoc1[0]);
-            this.add(labelTravailleSur);
+            if (lDoc1.length != 0) {
+                labelTravailleSur = new JLabel(lDoc1[1]);
+                labelTravailleSur.setName(lDoc1[0]);
+                this.add(labelTravailleSur);
 
-            labelTravailleSur.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    LabelTravailleSurMouseClicked(evt);
-                }
-            });
+                labelTravailleSur.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        LabelTravailleSurMouseClicked(evt);
+                    }
+                });
+            }
         }
     }
 
