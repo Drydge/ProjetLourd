@@ -5,11 +5,12 @@
  */
 package projetlourd;
 
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /*TO DO :
 */
@@ -34,6 +35,7 @@ public class Application extends javax.swing.JFrame {
         centerPanel = new MonProfil();
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
         pack();
+        repaint();
     }
     
     public final static  Application getInstance() throws IOException {
@@ -77,7 +79,7 @@ public class Application extends javax.swing.JFrame {
 
         rechercheTextField.setToolTipText("Rechercher un document");
 
-        rechercheComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Titre", "Auteur"}));
+        rechercheComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Titre", "Auteur" }));
 
         rechercheButton.setText("Recherche");
         rechercheButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,38 +96,43 @@ public class Application extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Bonjour " + Connexion.PSEUDO);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
-                headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(headerLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(deconnexionButton))
-                        .addGroup(headerLayout.createSequentialGroup()
-                                .addGap(170, 170, 170)
-                                .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(headerLayout.createSequentialGroup()
-                                                .addGap(80, 80, 80)
-                                                .addComponent(rechercheButton))
-                                        .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(deconnexionButton))
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(rechercheButton))
+                    .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         headerLayout.setVerticalGroup(
-                headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(headerLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(deconnexionButton))
-                                .addGap(18, 18, 18)
-                                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(rechercheButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deconnexionButton))
+                .addGap(18, 18, 18)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rechercheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechercheButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechercheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getContentPane().add(header, java.awt.BorderLayout.NORTH);
@@ -146,8 +153,6 @@ public class Application extends javax.swing.JFrame {
 
         String recherches = Connexion.GESTIONBD.getRecherche(type, toSearch);
 
-        System.out.println(recherches);
-
         String[] parties = recherches.split(",");
         String[] parties2;
 
@@ -159,8 +164,11 @@ public class Application extends javax.swing.JFrame {
             parties2 = party.split("-");
             lRecherche.add(parties2);
         }
-        System.out.println("----------- " + lRecherche.get(0));
+        this.remove(centerPanel);
         centerPanel = new ResultatRecherche(lRecherche);
+        getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
+        pack();
+        repaint();
     }//GEN-LAST:event_rechercheButtonMouseClicked
 
     private void deconnexionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deconnexionButtonMouseClicked
@@ -172,6 +180,14 @@ public class Application extends javax.swing.JFrame {
         Connexion connexion = new Connexion();
         connexion.setVisible(true);
     }//GEN-LAST:event_deconnexionButtonMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+         this.remove(centerPanel);
+        centerPanel = new MonProfil();
+        getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
+        pack();
+        repaint();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deconnexionButton;
