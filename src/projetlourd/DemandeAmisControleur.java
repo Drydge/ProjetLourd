@@ -5,9 +5,12 @@
  */
 package projetlourd;
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -25,10 +28,16 @@ class DemandeAmisControleur implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        for (JLabel jlab : dAP.labelDemande) {
-            if(jlab == me.getSource())
-                System.out.println("on clique sur " + jlab.getText());
+        for (JPanel jPane : dAP.panelDemande) {
+            Component[] components = jPane.getComponents();
+            if (components[3] == me.getSource()) {
+                if (((JRadioButton) components[1]).isSelected()) {
+                    Connexion.GESTIONBD.setAmis(components[3].getName(), Connexion.PSEUDO);
+                }
+                Connexion.GESTIONBD.dropDemande(components[3].getName(), Connexion.PSEUDO);
+            }
         }
+        oDA.notifyObservers();
     }
 
     @Override

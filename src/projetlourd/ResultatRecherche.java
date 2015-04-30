@@ -26,7 +26,6 @@ public class ResultatRecherche extends javax.swing.JPanel {
      * @param lRecherche
      */
     public ResultatRecherche(List<String[]> lRecherche) {
-        System.out.println(lRecherche);
         for (String[] document : lRecherche) {
             Id.add(document[0]);
             Titre.add(document[1]);

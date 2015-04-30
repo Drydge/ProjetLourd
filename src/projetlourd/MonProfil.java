@@ -45,6 +45,7 @@ public class MonProfil extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jPanel5 = new javax.swing.JPanel();
@@ -156,6 +157,7 @@ public class MonProfil extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane AmisSelected;
     private javax.swing.JScrollPane amisScrollPane;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton creerDocumentButton;
     private javax.swing.JTextField creerDocumentTextField;
     private javax.swing.JButton demandeAmisButton;
