@@ -50,6 +50,6 @@ class TravailleSurPanel extends JPanel {
 
     private void LabelTravailleSurMouseClicked(MouseEvent evt) {
         JLabel jlab = (JLabel) evt.getComponent();
-        System.out.println("on clique sur " + jlab.getText());
+        System.out.println("on clique sur " + jlab.getName());
     }
 }
