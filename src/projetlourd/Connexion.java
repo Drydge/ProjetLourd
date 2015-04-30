@@ -93,12 +93,7 @@ public class Connexion extends javax.swing.JFrame {
         jPanel3.add(jLabel4);
 
         connexionPseudonyme.setText("Thierry9000");
-        connexionPseudonyme.setName("connexionPseudonyme"); // NOI18N
-        connexionPseudonyme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connexionPseudonymeActionPerformed(evt);
-            }
-        });
+        connexionPseudonyme.setName("connexionPseudonyme");
         jPanel3.add(connexionPseudonyme);
         jPanel3.add(filler3);
 
