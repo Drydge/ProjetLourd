@@ -23,7 +23,7 @@ import javax.swing.*;
  * @author francis
  */
 public class Application extends javax.swing.JFrame {
-
+    JFrame editor;
     JPanel centerPanel;
     private static Application _instance;
 
