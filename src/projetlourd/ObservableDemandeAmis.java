@@ -13,24 +13,22 @@ import java.util.Observable;
  *
  * @author francis
  */
-class ObversableAmis extends Observable {
+public class ObservableDemandeAmis extends Observable{
+    List<String> lDemandeAmis;
 
-    List<String> lAmis;
-
-    public ObversableAmis(String pseudo) {
+    public ObservableDemandeAmis(String pseudo) {
         GestionBD gestionBD = Connexion.GESTIONBD;
+        String demandeAmis = gestionBD.getDemandeAmis(pseudo);
 
-        String amis = gestionBD.getAmis(Connexion.PSEUDO);
-
-        String[] parties = amis.split(",");
+        String[] parties = demandeAmis.split(",");
         String[] parties2;
+        
+        lDemandeAmis = new ArrayList<>();
 
-        lAmis = new ArrayList<>();
-
-        //on exécute des traitements sur la chaîne retournée et on ajoute les amis à une liste de String
+        //même traitement que pour la liste d'amis
         for (String party : parties) {
             parties2 = party.split("-");
-            lAmis.add(parties2[0]);
+            lDemandeAmis.add(parties2[0]);
         }
     }
 }

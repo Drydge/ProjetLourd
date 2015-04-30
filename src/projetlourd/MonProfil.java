@@ -5,10 +5,6 @@
  */
 package projetlourd;
 
-import java.util.Observable;
-import javax.swing.JLabel;
-
-
 /**
  *
  * @author francis
@@ -34,8 +30,10 @@ public class MonProfil extends javax.swing.JPanel {
         travailleSurPanel = new TravailleSurPanel(Connexion.PSEUDO);
         travailleSurScrollPane.setViewportView(travailleSurPanel);
         
-        //demandeAmisPanel = new DemandeAmiPanel(Connexion.PSEUDO);
-        //demandeamisScrollPane.setViewportView(demandeAmisPanel);
+        ObservableDemandeAmis oDA = new ObservableDemandeAmis(Connexion.PSEUDO);
+        
+        demandeAmisPanel = new DemandeAmiPanel(oDA);
+        demandeamisScrollPane.setViewportView(demandeAmisPanel);
     }
 
     /**
@@ -151,7 +149,7 @@ public class MonProfil extends javax.swing.JPanel {
     }//GEN-LAST:event_lectureComboBoxActionPerformed
 
     private void demandeAmisTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demandeAmisTextFieldActionPerformed
-        // TODO add your handling code here:
+        System.out.println("lol");
     }//GEN-LAST:event_demandeAmisTextFieldActionPerformed
 
 

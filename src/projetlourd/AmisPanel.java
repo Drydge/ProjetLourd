@@ -1,8 +1,6 @@
 package projetlourd;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
@@ -36,7 +34,7 @@ class AmisPanel extends JPanel implements Observer {
     
     @Override
     public void update(Observable o, Object o1) {
-        observableAmis.lAmis = ((ObversableAmis) o).getLAmis();
+        observableAmis.lAmis = ((ObversableAmis) o).lAmis;
         
         int i = 0;
         
