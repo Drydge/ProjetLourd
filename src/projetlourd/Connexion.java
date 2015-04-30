@@ -93,8 +93,7 @@ public class Connexion extends javax.swing.JFrame {
         jPanel3.add(jLabel4);
 
         connexionPseudonyme.setText("Thierry9000");
-        connexionPseudonyme.setName("connexionPseudonyme"); // NOI18N
-        
+        connexionPseudonyme.setName("connexionPseudonyme");
         jPanel3.add(connexionPseudonyme);
         jPanel3.add(filler3);
 
@@ -109,7 +108,6 @@ public class Connexion extends javax.swing.JFrame {
         jPanel2.add(jLabel5);
 
         connexionPassword.setText("Thierry9000");
-        
         jPanel2.add(connexionPassword);
         jPanel2.add(filler1);
 
