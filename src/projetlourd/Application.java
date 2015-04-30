@@ -5,11 +5,12 @@
  */
 package projetlourd;
 
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /*TO DO :
 */
@@ -34,6 +35,7 @@ public class Application extends javax.swing.JFrame {
         centerPanel = new MonProfil();
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
         pack();
+        repaint();
     }
     
     public final static  Application getInstance() throws IOException {
@@ -94,6 +96,11 @@ public class Application extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Bonjour " + Connexion.PSEUDO);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
@@ -146,8 +153,6 @@ public class Application extends javax.swing.JFrame {
 
         String recherches = Connexion.GESTIONBD.getRecherche(type, toSearch);
 
-        System.out.println(recherches);
-
         String[] parties = recherches.split(",");
         String[] parties2;
 
@@ -159,8 +164,11 @@ public class Application extends javax.swing.JFrame {
             parties2 = party.split("-");
             lRecherche.add(parties2);
         }
-        System.out.println("----------- " + lRecherche.get(0));
+        this.remove(centerPanel);
         centerPanel = new ResultatRecherche(lRecherche);
+        getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
+        pack();
+        repaint();
     }//GEN-LAST:event_rechercheButtonMouseClicked
 
     private void deconnexionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deconnexionButtonMouseClicked
@@ -172,6 +180,14 @@ public class Application extends javax.swing.JFrame {
         Connexion connexion = new Connexion();
         connexion.setVisible(true);
     }//GEN-LAST:event_deconnexionButtonMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+         this.remove(centerPanel);
+        centerPanel = new MonProfil();
+        getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
+        pack();
+        repaint();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deconnexionButton;
