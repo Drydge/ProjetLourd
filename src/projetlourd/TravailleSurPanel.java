@@ -8,9 +8,7 @@ package projetlourd;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -49,6 +47,8 @@ class TravailleSurPanel extends JPanel {
 
     private void LabelTravailleSurMouseClicked(MouseEvent evt) {
         JLabel jlab = (JLabel) evt.getComponent();
+        JFrame editor = new Editeur(jlab.getName());
+        editor.setVisible(true);
         System.out.println("on clique sur " + jlab.getText());
     }
 }

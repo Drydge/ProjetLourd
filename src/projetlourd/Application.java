@@ -24,7 +24,7 @@ import javax.swing.*;
  * @author francis
  */
 public class Application extends javax.swing.JFrame {
-
+    JFrame editor;
     JPanel centerPanel;
     private static Application _instance;
     /**
@@ -167,6 +167,7 @@ public class Application extends javax.swing.JFrame {
         this.remove(centerPanel);
         centerPanel = new ResultatRecherche(lRecherche);
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
+
         pack();
         repaint();
     }//GEN-LAST:event_rechercheButtonMouseClicked
