@@ -18,6 +18,7 @@ public class Editeur extends javax.swing.JFrame {
     public Editeur(String id) {
         this.id=id;
         initComponents();
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     /**
