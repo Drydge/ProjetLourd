@@ -6,6 +6,7 @@
 package projetlourd;
 
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import javax.swing.JLabel;
 
 
@@ -25,8 +26,21 @@ class AmisControleur implements MouseListener{
     @Override
     public void mouseClicked(java.awt.event.MouseEvent me) {
         for (JLabel jlab : aP.labelAmi) {
-            if(jlab == me.getSource())
+            if(jlab == me.getSource()){
                 System.out.println("on clique sur " + jlab.getText());
+                try {
+                    Application.getInstance().remove(Application.getInstance().centerPanel);
+                    Application.getInstance().centerPanel = new Profils(jlab.getText());
+                    Application.getInstance().centerPanel.setVisible(true);
+                    Application.getInstance().add(Application.getInstance().centerPanel, java.awt.BorderLayout.CENTER);
+                    Application.getInstance().pack();
+                    Application.getInstance().repaint();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
         }
     }
 
