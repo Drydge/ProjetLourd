@@ -13,25 +13,27 @@ import java.util.List;
  */
 public class ResultatRecherche extends javax.swing.JPanel {
 
+    List<String> Id;
     List<String> Titre;
     List<String> Auteur;
     List<String> Lecture;
     List<String> Ecriture;
     List<String> NbParticipants;
+
     /**
      * Creates new form ResultatRecherche
+     *
      * @param lRecherche
      */
     public ResultatRecherche(List<String[]> lRecherche) {
         System.out.println(lRecherche);
-        for (String[] document : lRecherche)
-
-        {
-           // Titre.add(document[0]);
-           // Auteur.add(document[1]);
-            //Lecture.add(document[2]);
-            //Ecriture.add(document[3]);
-            //NbParticipants.add(document[4]);
+        for (String[] document : lRecherche) {
+            Id.add(document[0]);
+            Titre.add(document[1]);
+            Auteur.add(document[2]);
+            Lecture.add(document[3]);
+            Ecriture.add(document[4]);
+            NbParticipants.add(document[5]);
         }
         initComponents();
     }

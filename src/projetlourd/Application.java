@@ -159,9 +159,8 @@ public class Application extends javax.swing.JFrame {
             parties2 = party.split("-");
             lRecherche.add(parties2);
         }
-
+        System.out.println("----------- " + lRecherche.get(0));
         centerPanel = new ResultatRecherche(lRecherche);
-        
     }//GEN-LAST:event_rechercheButtonMouseClicked
 
     private void deconnexionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deconnexionButtonMouseClicked
