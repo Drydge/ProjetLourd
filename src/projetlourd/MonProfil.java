@@ -26,9 +26,9 @@ public class MonProfil extends javax.swing.JPanel {
         amisPanel = new AmisPanel(oa);
         amisScrollPane.setViewportView(amisPanel);
         
+        oa.addObserver(amisPanel);
         
         travailleSurPanel = new TravailleSurPanel(Connexion.PSEUDO);
-        oa.addObserver(amisPanel);
         travailleSurScrollPane.setViewportView(travailleSurPanel);
         
         ObservableDemandeAmis oDA = new ObservableDemandeAmis(Connexion.PSEUDO);
