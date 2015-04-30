@@ -35,9 +35,10 @@ class DemandeAmisControleur implements MouseListener {
                     Connexion.GESTIONBD.setAmis(components[3].getName(), Connexion.PSEUDO);
                 }
                 Connexion.GESTIONBD.dropDemande(components[3].getName(), Connexion.PSEUDO);
+                
+                oDA.remove(components[3].getName());
             }
         }
-        oDA.notifyObservers();
     }
 
     @Override

@@ -137,9 +137,6 @@
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Entrez ici le pseudonyme de votre potentiel futur ami"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="demandeAmisTextFieldActionPerformed"/>
-                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jPanel6">
 
@@ -162,6 +159,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Envoyer"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="demandeAmisButtonMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -207,14 +207,14 @@
                           </StringArray>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lectureComboBoxActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="creerDocumentButton">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Cr&#xe9;er !"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="creerDocumentButtonMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

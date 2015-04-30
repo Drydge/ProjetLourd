@@ -5,6 +5,7 @@
  */
 package projetlourd;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -15,12 +16,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author francis
  */
-class DemandeAmiPanel extends JPanel implements Observer{
+class DemandeAmiPanel extends JPanel implements Observer {
 
     ArrayList<JPanel> panelDemande = new ArrayList<>();
     ObservableDemandeAmis observableDemandeAmis;
@@ -28,44 +32,67 @@ class DemandeAmiPanel extends JPanel implements Observer{
     public DemandeAmiPanel(ObservableDemandeAmis oDA) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         observableDemandeAmis = oDA;
-        
-        observableDemandeAmis.addObserver(this);
-        
+
         for (String lAmi : oDA.lDemandeAmis) {
             JPanel courant = new JPanel();
             courant.add(new JLabel(lAmi));
-            
+
             JRadioButton accepterButton = new JRadioButton("Accepter");
             JRadioButton refuserButton = new JRadioButton("Refuser");
-            
-            accepterButton.setName(lAmi + "a");
-            refuserButton.setName(lAmi + "r");
-            
+
             JButton envoyerButton = new JButton("Envoyer !");
             envoyerButton.setName(lAmi);
-            
-            
+
             ButtonGroup group = new ButtonGroup();
-            
+
             group.add(accepterButton);
             group.add(refuserButton);
-            
+
             courant.add(accepterButton);
             courant.add(refuserButton);
             courant.add(envoyerButton);
-            
+
             panelDemande.add(courant);
             this.add(panelDemande.get(panelDemande.size() - 1));
 
             DemandeAmisControleur dAC = new DemandeAmisControleur(observableDemandeAmis, this);
-            
+
             envoyerButton.addMouseListener(dAC);
         }
     }
 
     @Override
     public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JViewport jView = (JViewport) this.getParent();
+        for (String lAmi : ((ObservableDemandeAmis) o).lDemandeAmis) {
+            JPanel courant = new JPanel();
+            courant.add(new JLabel(lAmi));
+
+            JRadioButton accepterButton = new JRadioButton("Accepter");
+            JRadioButton refuserButton = new JRadioButton("Refuser");
+
+            JButton envoyerButton = new JButton("Envoyer !");
+            envoyerButton.setName(lAmi);
+
+            ButtonGroup group = new ButtonGroup();
+
+            group.add(accepterButton);
+            group.add(refuserButton);
+
+            courant.add(accepterButton);
+            courant.add(refuserButton);
+            courant.add(envoyerButton);
+
+            panelDemande.add(courant);
+            this.add(panelDemande.get(panelDemande.size() - 1));
+
+            DemandeAmisControleur dAC = new DemandeAmisControleur(observableDemandeAmis, this);
+
+            envoyerButton.addMouseListener(dAC);
+        }/*
+        jView.setView(this);
+        jView.revalidate();
+        jView.repaint();*/
     }
 
 }

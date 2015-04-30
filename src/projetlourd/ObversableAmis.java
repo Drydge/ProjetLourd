@@ -14,7 +14,6 @@ import java.util.Observable;
  * @author francis
  */
 class ObversableAmis extends Observable {
-
     List<String> lAmis;
 
     public ObversableAmis(String pseudo) {

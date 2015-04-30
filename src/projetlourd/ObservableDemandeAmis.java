@@ -31,4 +31,10 @@ public class ObservableDemandeAmis extends Observable{
             lDemandeAmis.add(parties2[0]);
         }
     }
+
+    public void remove(String name) {
+        lDemandeAmis.remove(name);
+        setChanged();
+        notifyObservers();
+    }
 }

@@ -28,11 +28,13 @@ public class MonProfil extends javax.swing.JPanel {
         
         
         travailleSurPanel = new TravailleSurPanel(Connexion.PSEUDO);
+        oa.addObserver(amisPanel);
         travailleSurScrollPane.setViewportView(travailleSurPanel);
         
         ObservableDemandeAmis oDA = new ObservableDemandeAmis(Connexion.PSEUDO);
         
         demandeAmisPanel = new DemandeAmiPanel(oDA);
+        oDA.addObserver(demandeAmisPanel);
         demandeamisScrollPane.setViewportView(demandeAmisPanel);
     }
 
@@ -92,17 +94,17 @@ public class MonProfil extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         demandeAmisTextField.setToolTipText("Entrez ici le pseudonyme de votre potentiel futur ami");
-        demandeAmisTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                demandeAmisTextFieldActionPerformed(evt);
-            }
-        });
         jPanel2.add(demandeAmisTextField);
 
         jPanel6.setLayout(new java.awt.GridLayout(1, 0));
         jPanel6.add(filler1);
 
         demandeAmisButton.setText("Envoyer");
+        demandeAmisButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                demandeAmisButtonMouseClicked(evt);
+            }
+        });
         jPanel6.add(demandeAmisButton);
 
         jPanel2.add(jPanel6);
@@ -120,14 +122,14 @@ public class MonProfil extends javax.swing.JPanel {
         jPanel4.add(ecritureComboBox);
 
         lectureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Public", "Amis", "Utilisateur" }));
-        lectureComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lectureComboBoxActionPerformed(evt);
-            }
-        });
         jPanel4.add(lectureComboBox);
 
         creerDocumentButton.setText("Créer !");
+        creerDocumentButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                creerDocumentButtonMouseClicked(evt);
+            }
+        });
         jPanel4.add(creerDocumentButton);
 
         jPanel3.add(jPanel4);
@@ -145,13 +147,27 @@ public class MonProfil extends javax.swing.JPanel {
         add(jPanel5, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lectureComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lectureComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lectureComboBoxActionPerformed
+    private void demandeAmisButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_demandeAmisButtonMouseClicked
+        String destinataire = demandeAmisTextField.getText();
+        
+        if(destinataire.length() != 0){
+            boolean setAmis = Connexion.GESTIONBD.setDemandeAmis(Connexion.PSEUDO, destinataire);
+            
+            if(setAmis)
+                demandeAmisTextField.setText("");
+        }
+    }//GEN-LAST:event_demandeAmisButtonMouseClicked
 
-    private void demandeAmisTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demandeAmisTextFieldActionPerformed
-        System.out.println("lol");
-    }//GEN-LAST:event_demandeAmisTextFieldActionPerformed
+    private void creerDocumentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creerDocumentButtonMouseClicked
+        String titre = creerDocumentTextField.getText();
+        
+        if(titre.length() != 0){
+            String lecture = (String) lectureComboBox.getSelectedItem();
+            String ecriture = (String) ecritureComboBox.getSelectedItem();
+            
+            Connexion.GESTIONBD.setNouveauDocument(titre, lecture, ecriture, Connexion.PSEUDO);
+        }
+    }//GEN-LAST:event_creerDocumentButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

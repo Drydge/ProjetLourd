@@ -13,12 +13,11 @@ import java.util.List;
 import javax.swing.*;
 
 /*TO DO :
-*/
+ */
 
 /*IDEA :
-* à chaque action on change le Application.Panel where placement = center
-*/
-
+ * à chaque action on change le Application.Panel where placement = center
+ */
 /**
  *
  * @author francis
@@ -27,6 +26,7 @@ public class Application extends javax.swing.JFrame {
 
     JPanel centerPanel;
     private static Application _instance;
+
     /**
      * Creates new form Application
      */
@@ -37,11 +37,11 @@ public class Application extends javax.swing.JFrame {
         pack();
         repaint();
     }
-    
-    public final static  Application getInstance() throws IOException {
-        if(_instance == null){
-            synchronized(Application.class){
-                if(Application._instance == null) {
+
+    public final static Application getInstance() throws IOException {
+        if (_instance == null) {
+            synchronized (Application.class) {
+                if (Application._instance == null) {
                     Application._instance = new Application();
                 }
             }
@@ -151,24 +151,26 @@ public class Application extends javax.swing.JFrame {
         String toSearch = rechercheTextField.getText();
         String type = (String) rechercheComboBox.getSelectedItem();
 
-        String recherches = Connexion.GESTIONBD.getRecherche(type, toSearch);
+        if (toSearch.length() != 0) {
+            String recherches = Connexion.GESTIONBD.getRecherche(type, toSearch);
 
-        String[] parties = recherches.split(",");
-        String[] parties2;
+            String[] parties = recherches.split(",");
+            String[] parties2;
 
-        List<String[]> lRecherche = new ArrayList<>();
+            List<String[]> lRecherche = new ArrayList<>();
 
-        //on exécute des traitements sur la chaîne retournée par la requête
-        for (String party : parties) {
-            //chaque ligne est un tableau de chaîne, on a donc une liste de String[]
-            parties2 = party.split("-");
-            lRecherche.add(parties2);
+            //on exécute des traitements sur la chaîne retournée par la requête
+            for (String party : parties) {
+                //chaque ligne est un tableau de chaîne, on a donc une liste de String[]
+                parties2 = party.split("-");
+                lRecherche.add(parties2);
+            }
+            this.remove(centerPanel);
+            centerPanel = new ResultatRecherche(lRecherche);
+            getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
+            pack();
+            repaint();
         }
-        this.remove(centerPanel);
-        centerPanel = new ResultatRecherche(lRecherche);
-        getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
-        pack();
-        repaint();
     }//GEN-LAST:event_rechercheButtonMouseClicked
 
     private void deconnexionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deconnexionButtonMouseClicked
@@ -182,7 +184,7 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_deconnexionButtonMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-         this.remove(centerPanel);
+        this.remove(centerPanel);
         centerPanel = new MonProfil();
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
         pack();
