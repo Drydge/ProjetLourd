@@ -5,12 +5,22 @@ import java.util.List;
 import java.util.Observable;
 
 /**
+ * Observable pour les amis
  *
- * @author francis
+ * @author Francis
+ * @author Anthony
  */
 class ObversableAmis extends Observable {
+
     List<String> lAmis;
 
+    /**
+     * On rempli la liste avec les amis de pseudo
+     *
+     * @param pseudo
+     * @author Francis
+     * @author Anthony
+     */
     public ObversableAmis(String pseudo) {
         GestionBD gestionBD = Connexion.GESTIONBD;
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projetlourd;
 
 import java.awt.event.MouseListener;
@@ -11,24 +6,41 @@ import javax.swing.JLabel;
 
 
 /**
- *
+ * Controleur pour AmisPanel
+ * 
  * @author francis
+ * @author Anthony
  */
 class AmisControleur implements MouseListener{
     ObversableAmis oA;
     AmisPanel aP;
     
+    /**
+     * On fait les liens
+     * @param oA
+     * @param aP 
+     * @author Anthony
+     * @author Francis
+     */
     AmisControleur(ObversableAmis oA, AmisPanel aP) {
         this.oA = oA;
         this.aP = aP;
     }
     
+    /**
+     * Action déclenché quand on clique sur le pseudo d'un ami
+     * 
+     * @param me 
+     * @author Francis
+     * @author Anthony
+     */
     @Override
     public void mouseClicked(java.awt.event.MouseEvent me) {
         for (JLabel jlab : aP.labelAmi) {
             if(jlab == me.getSource()){
                 System.out.println("on clique sur " + jlab.getText());
                 try {
+                    //on créé un nouveau centerPanel qui sera le Profil de l'ami
                     Application.getInstance().remove(Application.getInstance().centerPanel);
                     Application.getInstance().centerPanel = new Profils(jlab.getText());
                     Application.getInstance().centerPanel.setVisible(true);

@@ -10,19 +10,29 @@ import java.util.List;
 import java.util.Observable;
 
 /**
+ * Un observable pour les demandes d'amis
  *
- * @author francis
+ * @author Francis
+ * @author Anthony
  */
-public class ObservableDemandeAmis extends Observable{
+public class ObservableDemandeAmis extends Observable {
+
     List<String> lDemandeAmis;
 
+    /**
+     * On rempli la liste des demande d'amis avec les demande d'amis de pseudo
+     *
+     * @param pseudo
+     * @author Francis
+     * @author Anthony
+     */
     public ObservableDemandeAmis(String pseudo) {
         GestionBD gestionBD = Connexion.GESTIONBD;
         String demandeAmis = gestionBD.getDemandeAmis(pseudo);
 
         String[] parties = demandeAmis.split(",");
         String[] parties2;
-        
+
         lDemandeAmis = new ArrayList<>();
 
         //même traitement que pour la liste d'amis
@@ -32,6 +42,14 @@ public class ObservableDemandeAmis extends Observable{
         }
     }
 
+    /**
+     * Quand on répond à une demande d'ami on la supprime de la BDD donc aussi
+     * de la liste
+     *
+     * @param name
+     * @author Francis
+     * @author Anthony
+     */
     public void remove(String name) {
         lDemandeAmis.remove(name);
         setChanged();

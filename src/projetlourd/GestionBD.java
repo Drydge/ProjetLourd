@@ -1,4 +1,5 @@
-package projetlourd; //package general du projet
+package projetlourd;
+
 
 //import pour le SSH
 import com.jcraft.jsch.JSch;
@@ -6,6 +7,7 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 //import pour le pool de connexion
+import org.apache.commons.dbcp.BasicDataSource;
 
 //import pour jdbc
 import java.sql.Connection;
@@ -18,32 +20,31 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.dbcp.BasicDataSource;
 
 /**
- * Classe qui permet les interactions entre l'application et la base de données
+ * Sorte de JavaBean (non Serializable) qui permet les interactions entre l'application et la base de
+ * données. A chaque connexion d'un utilisateur un bean sera instancié et stocké
+ * dans sa session
  *
  * @author Francis
  */
 public class GestionBD {
-
     /*
      Pour chaque GestionBD on aura une Connection, un PreparedStatement, un ResultSet
      et un ResultSetMetaData
      */
-    Connection c;
-    PreparedStatement pst;
-    ResultSet rs;
-    ResultSetMetaData rsmd;
 
-    public static Session session = null; //La Session est un singleton qui permet de se connecter à mira
+    private Connection c;
+    private PreparedStatement pst;
+    private ResultSet rs;
+    private ResultSetMetaData rsmd;
+
+    private static Session session = null; //La Session est un singleton qui permet de se connecter à mira
 
     //public BoneCP connexionPool = null; //Le connection pool est initialisé à nul
-    public BasicDataSource ds = null;
+    private BasicDataSource ds = null;
 
-    private static GestionBD gestionBD = null;
-
-    int nbLignes; //nombre de ligne du rsmd
+    private int nbLignes; //nombre de ligne du rsmd
 
     /**
      * Méthode qui permet de faire un ssh. Méthode récupérée à cette adresse :
@@ -86,52 +87,36 @@ public class GestionBD {
             String strSshHost = "mira.c2m.univ-st-etienne.fr";          // hostname or ip or SSH server
             int nSshPort = 22;                                    // remote SSH host port number
             String strRemoteHost = "localhost";  // hostname or ip of your database server
-            int nLocalPort = 3366;                                // local port number use to bind SSH tunnel
+            int nLocalPort = 3367;                                // local port number use to bind SSH tunnel
             int nRemotePort = 3306;                               // remote port number of your database 
             String strDbUser = "lf03440m";                    // database loging username
             String strDbPassword = "UUSHJJPD";                    // database login password
 
-            if(session == null)
+            if (session == null) {
                 doSshTunnel(strSshUser, strSshPassword, strSshHost, nSshPort, strRemoteHost, nLocalPort, nRemotePort);
-           
-            //GestionBD.getInstance();
+            }
 
-            ds = new BasicDataSource();
-            ds.setDriverClassName("com.mysql.jdbc.Driver");
-            ds.setUsername(strDbUser);
-            ds.setPassword(strDbPassword);
-            ds.setUrl("jdbc:mysql://localhost:" + nLocalPort + "/" + strDbUser);
+            if (session != null) {
+                if (!session.isConnected()) {
+                    doSshTunnel(strSshUser, strSshPassword, strSshHost, nSshPort, strRemoteHost, nLocalPort, nRemotePort);
+                }
+            }
 
-            /*
-             BoneCPConfig config = new BoneCPConfig();
+            if (ds == null) {
+                ds = new BasicDataSource();
+                ds.setDriverClassName("com.mysql.jdbc.Driver");
+                ds.setUsername(strDbUser);
+                ds.setPassword(strDbPassword);
+                ds.setUrl("jdbc:mysql://localhost:" + nLocalPort + "/" + strDbUser);
+                ds.setPoolPreparedStatements(true);
+            }
 
-             config.setJdbcUrl("jdbc:mysql://localhost:" + nLocalPort + "/" + strSshUser);
-             config.setUsername(strSshUser);
-             config.setPassword(strDbPassword);
-
-             config.setMinConnectionsPerPartition(1);
-             config.setMaxConnectionsPerPartition(10);
-             config.setPartitionCount(2);
-
-             System.out.println("debug0");
-             connexionPool = new BoneCP(config);
-             System.out.println("debug1\n");
-
-             System.out.println(connexionPool.getStatistics().toString());
-             */
             c = ds.getConnection();
         } catch (SQLException | JSchException ex) {
             Logger.getLogger(GestionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static GestionBD getGestionBD() {
-        if (GestionBD.gestionBD == null) {
-            GestionBD.gestionBD = new GestionBD();
-        }
-        return GestionBD.gestionBD;
-    }
-    
+
     /**
      * Méthode qui affiche un rsmd, utilisé pour le debugging
      *
@@ -389,6 +374,32 @@ public class GestionBD {
     }
 
     /**
+     * Méthode qui affiches les pseudonyme des utilisateurs qui travaillent sur
+     * le document ayant pour IDDocument id
+     *
+     * @see DocumentModel
+     * @param id l'IDDocument dont on souhaite obtenir les travailleurs
+     * @return une châine traitée dans DocumentModel
+     * @author Francis
+     */
+    public String getTravailleur(String id) {
+        String resultat = "";
+        try {
+            pst = c.prepareStatement("SELECT Utilisateur FROM TravailleSur WHERE Document=?;");
+            pst.setString(1, id);
+
+            rs = pst.executeQuery();
+
+            resultat = extraireInfosRS(rs);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionBD.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultat;
+    }
+
+    /**
      * Méthode appelée quand un utilisateur s'inscrit. Méthode utilisée par la
      * servlet Inscription.
      *
@@ -604,7 +615,6 @@ public class GestionBD {
             Logger.getLogger(GestionBD.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
-        session.disconnect();
         System.out.println("tout est fermé");
     }
 
@@ -628,5 +638,90 @@ public class GestionBD {
             Logger.getLogger(GestionBD.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public boolean getExisteTravaille(String pseudo, String id) {
+        try {
+            pst = c.prepareStatement("SELECT * FROM TravailleSur WHERE Utilisateur=? AND Document=?;");
+            //On test dans les 2 sens car la relation d'amitié est symétrique
+            pst.setString(1, pseudo);
+            pst.setString(2, id);
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionBD.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Getter sur la variable private c
+     *
+     * @return la Connection du Bean GestionBD
+     */
+    public Connection getC() {
+        return c;
+    }
+
+    /**
+     * Getter sur la variable private pst
+     *
+     * @return le PreparedStatement du Bean GestionBD
+     */
+    public PreparedStatement getPst() {
+        return pst;
+    }
+
+    /**
+     * Getter sur la variable private rs
+     *
+     * @return le ResultSet du Bean GestionBD
+     */
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    /**
+     * Getter sur la variable private rsmd
+     *
+     * @return le ResulSetMetaData du Bean GestionBD
+     */
+    public ResultSetMetaData getRsmd() {
+        return rsmd;
+    }
+
+    /**
+     * Getter sur la variable private session
+     *
+     * @return la Session du Bean GestionBD
+     */
+    public static Session getSession() {
+        return session;
+    }
+
+    /**
+     * Getter sur la variable private ds
+     *
+     * @return le BasicDataSource du Bean GestionBD
+     */
+    public BasicDataSource getDs() {
+        return ds;
+    }
+
+    /**
+     * Getter sur la variable private nbLignes
+     *
+     * @return l'int du Bean GestionBD
+     */
+    public int getNbLignes() {
+        return nbLignes;
     }
 }

@@ -11,14 +11,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
- * @author francis
+ * JPanel pour afficher les amis
+ * 
+ * @author Anthony
+ * @author Francis
  */
 class AmisPanel extends JPanel implements Observer {
 
     ArrayList<JLabel> labelAmi = new ArrayList<>();
     ObversableAmis observableAmis;
 
+    
     public AmisPanel(ObversableAmis oa) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         observableAmis = oa;

@@ -17,8 +17,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * JPanel qui affiche les résultats d'une recherche
  *
- * @author drydge
+ * @author Anthony
  */
 public class ResultatRecherche extends javax.swing.JPanel {
 
@@ -26,9 +27,11 @@ public class ResultatRecherche extends javax.swing.JPanel {
     private JTable Tableau;
 
     /**
-     * Creates new form ResultatRecherche
+     * A partir d'une liste lRecherche résultat de l'intéroggation de la base de
+     * données on créé le tableau
      *
      * @param lRecherche
+     * @author Anthony
      */
     public ResultatRecherche(List<String[]> lRecherche) {
         Document = new Object[lRecherche.size()][6];
@@ -43,6 +46,11 @@ public class ResultatRecherche extends javax.swing.JPanel {
         Tableau.setFillsViewportHeight(true);
         this.add(scroll);
 
+        /**
+         * Ecouteur pour le tableau
+         * 
+         * @author Francis
+         */
         Tableau.getModel().addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == e.UPDATE) {
@@ -50,6 +58,7 @@ public class ResultatRecherche extends javax.swing.JPanel {
                     int row = Tableau.getSelectedRow();
 
                     if (col == 2) {
+                        //si on a cliqué dans la colonne amis on change le centerPanel en Profil(amiscliqué)
                         try {
                             Application.getInstance().remove(Application.getInstance().centerPanel);
                             Application.getInstance().centerPanel = new Profils(getString(col, row));
@@ -61,6 +70,7 @@ public class ResultatRecherche extends javax.swing.JPanel {
                             Logger.getLogger(ResultatRecherche.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
+                        //Sinon on ouvre un Editeur correspondant au document de la ligne sur laquelle on a cliqué
                         JFrame editor = new Editeur(Document[row][0].toString());
                         editor.setVisible(true);
                     }
@@ -69,7 +79,16 @@ public class ResultatRecherche extends javax.swing.JPanel {
         });
     }
 
-    String getString(int c, int r) {
+    /**
+     * Méthode qui permet de récupérer la String dans le tableau
+     * 
+     * @author Anthony
+     * @author Francis
+     * @param c numéro de colonne
+     * @param r numéro de ligne
+     * @return la String correspondant à (c,r)
+     */
+    public String getString(int c, int r) {
         return Document[r][c].toString();
     }
 

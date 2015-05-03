@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projetlourd;
 
 import com.jcraft.jsch.ChannelSftp;
@@ -17,22 +12,27 @@ import java.util.logging.Logger;
 import javax.swing.text.Document;
 
 /**
+ * JFrame permettant l'édition des documents
  *
- * @author drydge
+ * @author Anthony
  */
 public class Editeur extends javax.swing.JFrame {
+
     String id;
+
     /**
-     * Creates new form Editeur
-     * @param id
+     * Constructeur qui permet d'aller récupérer le texte du document sur le
+     * serveur
+     *
+     * @param id IDDocument du document
      */
     public Editeur(String id) {
-        this.id=id;
+        this.id = id;
         initComponents();
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        
+
         String result = Connexion.GESTIONBD.getDocument(id);
-        
+
         String[] parties = result.split(",");
 
         parties = parties[0].split("-");
@@ -43,7 +43,7 @@ public class Editeur extends javax.swing.JFrame {
         String auteur = parties[4];
 
         this.setTitle(titre);
-        
+
         String fic = "";
 
         boolean amis = Connexion.GESTIONBD.sontAmis(Connexion.PSEUDO, auteur);
@@ -54,7 +54,7 @@ public class Editeur extends javax.swing.JFrame {
             //si l'utilisateur est l'auteur du Document alors pas de soucis
             try {
                 //on créé cet objet qui permettra de creer des fichiers ou des dossiers mais aussi de les lire
-                ChannelSftp sftp = (ChannelSftp) GestionBD.session.openChannel("sftp");
+                ChannelSftp sftp = (ChannelSftp) GestionBD.getSession().openChannel("sftp");
                 sftp.connect(); //on se connecte
 
                 InputStream streamFic = sftp.get(chemin); //on récupère le fichier id à l'adresse ~/session/Projet/auteur
@@ -86,7 +86,7 @@ public class Editeur extends javax.swing.JFrame {
                 fic = "Ce document n'est visible que par " + auteur;
             }
         }
-        
+
         this.Fichier.setText(fic);
     }
 

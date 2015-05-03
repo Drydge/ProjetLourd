@@ -11,13 +11,20 @@ import java.util.List;
 import javax.swing.*;
 
 /**
+ * JPanel pour les documents sur lequel l'utilisateur travaille
  *
- * @author francis
+ * @author Anthony
  */
 class TravailleSurPanel extends JPanel {
 
     JLabel labelTravailleSur;
 
+    /**
+     * On créé un Panel à partir du Pseudo
+     *
+     * @param PSEUDO
+     * @author Anthony
+     */
     TravailleSurPanel(String PSEUDO) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         GestionBD gestionBD = Connexion.GESTIONBD;
@@ -36,7 +43,7 @@ class TravailleSurPanel extends JPanel {
         for (String[] lDoc1 : lDoc) {
             if (lDoc1.length != 0) {
                 labelTravailleSur = new JLabel(lDoc1[1]);
-                labelTravailleSur.setName(lDoc1[0]);
+                labelTravailleSur.setName(lDoc1[0]); //le name contient l'IDDocument
                 this.add(labelTravailleSur);
 
                 labelTravailleSur.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -48,10 +55,16 @@ class TravailleSurPanel extends JPanel {
         }
     }
 
+    /**
+     * Quand on clique sur un JLabel on récupère son nom (qui contient l'id
+     * unique) et on créé l'Editeur correspondant
+     *
+     * @author Anthony
+     * @param evt
+     */
     private void LabelTravailleSurMouseClicked(MouseEvent evt) {
         JLabel jlab = (JLabel) evt.getComponent();
         JFrame editor = new Editeur(jlab.getName());
         editor.setVisible(true);
-        System.out.println("on clique sur " + jlab.getText());
     }
 }

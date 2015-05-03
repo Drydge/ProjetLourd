@@ -5,9 +5,7 @@
  */
 package projetlourd;
 
-import java.awt.Component;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
@@ -16,13 +14,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
 
 /**
- *
- * @author francis
+ * Panel qui affiche les demande d'amis
+ * 
+ * @author Francis
  */
 class DemandeAmiPanel extends JPanel implements Observer {
 
@@ -89,10 +86,7 @@ class DemandeAmiPanel extends JPanel implements Observer {
             DemandeAmisControleur dAC = new DemandeAmisControleur(observableDemandeAmis, this);
 
             envoyerButton.addMouseListener(dAC);
-        }/*
-        jView.setView(this);
-        jView.revalidate();
-        jView.repaint();*/
+        }
     }
 
 }
