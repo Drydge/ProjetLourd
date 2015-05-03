@@ -1,8 +1,11 @@
 package projetlourd;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -43,6 +46,10 @@ class AmisPanel extends JPanel implements Observer {
             i++;
         }
         
-        repaint();
+        try {
+            Application.getInstance().repaint();
+        } catch (IOException ex) {
+            Logger.getLogger(AmisPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

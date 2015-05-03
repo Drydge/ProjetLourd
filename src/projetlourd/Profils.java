@@ -20,15 +20,15 @@ public class Profils extends javax.swing.JPanel {
      */
     public Profils(String name) {
         this.setVisible(true);
-        this.name =name;
+        this.name = name;
         initComponents();
 
-        ObversableAmis oa = new ObversableAmis(Connexion.PSEUDO);
+        ObversableAmis oa = new ObversableAmis(name);
 
         amisPanel = new AmisPanel(oa);
         amisScrollPane.setViewportView(amisPanel);
 
-        travailleSurPanel = new TravailleSurPanel(Connexion.PSEUDO);
+        travailleSurPanel = new TravailleSurPanel(name);
         oa.addObserver(amisPanel);
         travailleSurScrollPane.setViewportView(travailleSurPanel);
 

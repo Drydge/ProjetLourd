@@ -5,7 +5,6 @@
  */
 package projetlourd;
 
-import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;

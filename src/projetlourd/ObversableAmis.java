@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projetlourd;
 
 import java.util.ArrayList;
@@ -19,7 +14,7 @@ class ObversableAmis extends Observable {
     public ObversableAmis(String pseudo) {
         GestionBD gestionBD = Connexion.GESTIONBD;
 
-        String amis = gestionBD.getAmis(Connexion.PSEUDO);
+        String amis = gestionBD.getAmis(pseudo);
 
         String[] parties = amis.split(",");
         String[] parties2;
