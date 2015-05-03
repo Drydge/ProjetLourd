@@ -42,6 +42,8 @@ public class Editeur extends javax.swing.JFrame {
         String lecture = parties[2];
         String auteur = parties[4];
 
+        this.setTitle(titre);
+        
         String fic = "";
 
         boolean amis = Connexion.GESTIONBD.sontAmis(Connexion.PSEUDO, auteur);
